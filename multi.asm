@@ -74,14 +74,14 @@
 ;-----------------------------------------------------------------------------
 	org LOAD_ADDRESS
 .pages 3								; DO NOT go past $3300
-	icl	'fileio.lib'
-	icl	'vbxe_min.asm'					; Use my VBXE_SetPalette2 to load linear palete
+	icl 'fileio.lib'
+	icl 'vbxe_min.asm'					; Use my VBXE_SetPalette2 to load linear palete
 
 ;-----------------------------------------------------------------------------
 ; Clean up and exit based on LoadStatus
 ;-----------------------------------------------------------------------------
 Cleanup_Exit
-	lda	#MEMAC_GLOBAL_DISABLE			; USE CPU address space
+	lda #MEMAC_GLOBAL_DISABLE			; USE CPU address space
 	sta VBXE_MA_BSEL
 	sta VBXE_VIDEO_CONTROL				; Disable XDL
 
@@ -99,7 +99,7 @@ Cleanup_Exit
 	lda #$FF
 	sta CH								; Clear last key pressed
 
-	jmp	(DOSVEC)						; Return to DOS
+	jmp (DOSVEC)						; Return to DOS
 
 Wait_For_Key_Exit
 	lda #$FF
@@ -145,17 +145,17 @@ main
 ; Wait For VSync (locks to the refresh rate, PAL=50Hz, NTSC=60Hz)  Thanks tebe
 ;-----------------------------------------------------------------------------
 Wait_For_Sync							; Hold until VCOUNT == 0
-	bit	VCOUNT
+	bit VCOUNT
 	bmi *-3
-	bit	VCOUNT
+	bit VCOUNT
 	bpl *-3
 ; If present, the next 3 lines will allow a "jump to exit" on a specific key press
 	lda CH
 	cmp #$2F							; Press Q to quit
-	beq	Exit
+	beq Exit
 	rts									; Else return to caller
 Exit
-	jmp	Cleanup_Exit					; Clean up and exit (accounts for any long branch issues)
+	jmp Cleanup_Exit					; Clean up and exit (accounts for any long branch issues)
 ;-----------------------------------------------------------------------------
 ; Subroutines END
 ;-----------------------------------------------------------------------------

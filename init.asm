@@ -125,15 +125,15 @@ Device
 	beq Ram_Ok
 
 	lda #$01							; Set BASICF for OS
-	sta BASICF							; so BASIC remains OFF after RESET
+	sta BASICF							; So BASIC remains OFF after RESET
 
 	lda PORTB							; Disable BASIC bit in PORTB for MMU
-	ora #$02							; by Setting bit 2
+	ora #$02							; By Setting bit 2
 	sta PORTB
 
 	lda $A000							; Check if BASIC ROM area is now RAM
 	inc $A000							; This will also catch SDX not launching
-	cmp $A000							; the app via X
+	cmp $A000							; The app via X
 	beq Ram_Not_Ok						; If not, perform print error and exit
 
 	lda #$0C							; 12 = CLOSE
@@ -157,7 +157,7 @@ Ram_Ok
 	; jsr Wait_For_Key_Exit
 	rts
 
-Ram_Not_Ok; Add your error handling here, there still is a ROM....
+Ram_Not_Ok								; Add your error handling here, there still is a ROM....
 	ldy #$42							; Dark Red
 	sty COLOR2							; Set playfield
 
