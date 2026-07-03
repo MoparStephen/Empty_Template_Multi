@@ -1,3 +1,4 @@
+.def	NUM_DOTS						= $04
 ;-----------------------------------------------------------------------------
 ; Initialization
 ;-----------------------------------------------------------------------------
@@ -278,14 +279,12 @@ Print_VBXE_Detected_L1
 ; Update Progress bar - line 5 (y = $CB + (4 * increment #))
 	ldy Reg1
 	lda #$54							; Screen RAM code for Ctrl+T
+	ldx #NUM_DOTS						; Number of dots to write
+Progress_Bar_Loop
 	sta (Ptr_Lo),y
 	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
+	dex
+	bne Progress_Bar_Loop
 	sty Reg1							; Save pointer for progress bar updates
 
 	; jsr Wait_For_Key_Exit
@@ -319,14 +318,12 @@ Print_Clearing_Message_L1
 ; Update Progress bar - line 5 (y = $CB + (4 * increment #))
 	ldy Reg1
 	lda #$54							; Screen RAM code for Ctrl+T
+	ldx #NUM_DOTS						; Number of dots to write
+Progress_Bar_Loop
 	sta (Ptr_Lo),y
 	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
+	dex
+	bne Progress_Bar_Loop
 	sty Reg1							; Save pointer for progress bar updates
 
 	; jsr Wait_For_Key_Exit
@@ -404,14 +401,12 @@ Print_Load_XDL_Message_L1
 ; Update Progress bar - line 5 (y = $CB + (4 * increment #))
 	ldy Reg1
 	lda #$54							; Screen RAM code for Ctrl+T
+	ldx #NUM_DOTS						; Number of dots to write
+Progress_Bar_Loop
 	sta (Ptr_Lo),y
 	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
+	dex
+	bne Progress_Bar_Loop
 	sty Reg1							; Save pointer for progress bar updates
 
 	; jsr Wait_For_Key_Exit
@@ -449,14 +444,12 @@ Print_Load_BCB_Message_L1
 ; Update Progress bar - line 5 (y = $CB + (4 * increment #))
 	ldy Reg1
 	lda #$54							; Screen RAM code for Ctrl+T
+	ldx #NUM_DOTS						; Number of dots to write
+Progress_Bar_Loop
 	sta (Ptr_Lo),y
 	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
+	dex
+	bne Progress_Bar_Loop
 	sty Reg1							; Save pointer for progress bar updates
 
 	; jsr Wait_For_Key_Exit
@@ -494,14 +487,12 @@ Print_Load_Palette_Message_L1
 ; Update Progress bar - line 5 (y = $CB + (4 * increment #))
 	ldy Reg1
 	lda #$54							; Screen RAM code for Ctrl+T
+	ldx #NUM_DOTS						; Number of dots to write
+Progress_Bar_Loop
 	sta (Ptr_Lo),y
 	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
-	sta (Ptr_Lo),y
-	iny
+	dex
+	bne Progress_Bar_Loop
 	sty Reg1							; Save pointer for progress bar updates
 
 	; jsr Wait_For_Key_Exit
